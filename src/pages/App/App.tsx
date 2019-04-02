@@ -1,18 +1,35 @@
 import * as React from 'react';
-import './App.css';
+import Container from '@material-ui/lab/Container';
+import { ThemeProvider } from '@material-ui/styles';
+import { Theme, makeStyles, createMuiTheme, CssBaseline } from '@material-ui/core';
 
-import logo from '../../logo.svg';
+import Header from '../../components/Header';
+
+import Boards from '../Boards';
+
+const useStyles = makeStyles((theme: Theme) => {
+  return {
+    container: {
+      paddingTop: 76,
+    },
+  };
+});
+
+const theme = createMuiTheme({
+  palette: { type: 'dark', primary: { main: '#2196f3' } },
+});
 
 export default function App() {
+  const styles = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="App-title">Welcome to React</h1>
-      </header>
-      <p className="App-intro">
-        To get started, edit <code>src/App.tsx</code> and save to reload.
-      </p>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container className={styles.container}>
+        <CssBaseline />
+        <Header />
+
+        <Boards />
+      </Container>
+    </ThemeProvider>
   );
 }
